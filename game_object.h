@@ -1,0 +1,9 @@
+//
+// Created by Tim on 11.01.2021.
+//
+
+#ifndef DUNGEONCRAWLER_GAME_OBJECT_H
+#define DUNGEONCRAWLER_GAME_OBJECT_H
+
+
+#endif //DUNGEONCRAWLER_GAME_OBJECT_H
