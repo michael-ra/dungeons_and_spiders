@@ -46,10 +46,11 @@ int getPointHash(Point p) {
 
 bool check_key(unordered_map<Node, int, HashingNodes> dist, Node key)
 {
-    bool returntype = dist.find(key) == dist.end();
+    //bool returntype = dist.find(key) == dist.end(); //todo remove test
     return !(dist.find(key) == dist.end());
 }
 
+//checks with environment variable so world isnt needed in pathfinder
 bool isInside(int row, int col)
 {
     if( (row >= 0) && (row < xyMax) &&
@@ -61,7 +62,7 @@ bool isInside(int row, int col)
 }
 
 
-int BFS(int mat[30][30], Point src, Point dest)
+int pathfinder(world world, Point src, Point dest)
 {
     int distance = 0;
     unordered_map<Node, int, HashingNodes> dist;
@@ -81,7 +82,10 @@ int BFS(int mat[30][30], Point src, Point dest)
 
         if(getNodeHash(curr) == getPointHash(dest)) {
             destination = curr; //get to destination
-            break;
+
+
+
+            return -1; //sucess
         }
 
         q.pop();
@@ -114,25 +118,25 @@ int BFS(int mat[30][30], Point src, Point dest)
 
     }while(!q.empty());
 
-    cout << dist[destination];
-    return -1;
+    throw std::invalid_argument( "Points to pathfind given not connectable. Aborting everything - should we change this?" ); //TODO: Is this dangerous?
 
 }
+
+int* setPaths(Node destination) {
+   world::fields[destination.point.x][destination.point.y] = '\0';
+   for()
+}
+
+
 
 // Driver program to test above function
 int main()
 {
-    int world[30][30] = {};
+
+    world world;
 
     Point source = {0, 0};
     Point dest = {3, 4};
-
-    int dist = BFS(world, source, dest);
-
-    if (dist != -1)
-        cout << "Shortest Path is " << dist ;
-    else
-        cout << "Shortest Path doesn't exist";
 
     return 0;
 }
