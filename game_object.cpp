@@ -6,28 +6,27 @@
 
 class Game_Object {
 
-private:
+protected:
     //category of the element
     char entity;
     //position
     int x;
     int y;
 
+
 public:
+
+    Game_Object() {
+
+    }
+
     Game_Object(int x, int y) {
         this->x = x;
         this->y = y;
     }
 };
 
-class Player : public Game_Object {
 
-public:
-    int health;
-    int dps;
-
-
-};
 
 
 class Item : public Game_Object {

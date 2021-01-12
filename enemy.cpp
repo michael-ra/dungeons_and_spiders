@@ -10,6 +10,11 @@ protected:
     int health;
     int dps;
 
+    Enemy() {
+
+    }
+
+
     //Setter
 
     void set_health(int health) {
