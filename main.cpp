@@ -16,6 +16,10 @@ struct Node
     Point point;
     Node *previousNode;
 
+    [[nodiscard]] bool hasNext() const {
+        return previousNode != nullptr;
+    }
+
     bool operator==(const Node &other) const { return
         (point.y == other.point.y && point.x == other.point.x && previousNode == other.previousNode);
     }
@@ -69,7 +73,7 @@ int pathfinder(world world, Point src, Point dest)
     queue<Node> q;
     Node current = {
             src,
-            NULL
+            nullptr
     };
     dist[current] = 0;
     q.push(current);
@@ -123,8 +127,12 @@ int pathfinder(world world, Point src, Point dest)
 }
 
 int* setPaths(Node destination) {
-   world::fields[destination.point.x][destination.point.y] = '\0';
-   for()
+    fields[destination.point.x][destination.point.y] = '\0';
+    Node* which = destination.previousNode;
+    while(which->hasNext()) {
+        fields[which->point.x][which->point.y] = '\0';
+        which = which->previousNode;
+    }
 }
 
 
@@ -134,6 +142,27 @@ int main()
 {
 
     world world;
+    for (int p = 0; p < 30; p++) {
+        for(int q = 0; q < 30; q++) {
+            fields[p][q] = '0';
+        }
+    }
+    char ti[30][30];
+    for (int p = 0; p < 30; p++) {
+        for(int q = 0; q < 30; q++) {
+            ti[p][q] = '0';
+        }
+    }
+    cout<<" "<<fields[0,0];
+    cout<<" "<<ti[0,0];
+    for(int i=0; i<30; i++)
+    {
+        for(int j=0; j<30; j++)
+        {
+            cout<<" "<<fields[i,j];
+        }
+        cout<<"\n\n";
+    }
 
     Point source = {0, 0};
     Point dest = {3, 4};
