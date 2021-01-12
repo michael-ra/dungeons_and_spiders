@@ -147,21 +147,12 @@ int main()
             fields[p][q] = '0';
         }
     }
-    char ti[30][30];
+
     for (int p = 0; p < 30; p++) {
         for(int q = 0; q < 30; q++) {
-            ti[p][q] = '0';
+            cout << fields[p][q] << " ";
         }
-    }
-    cout<<" "<<fields[0,0];
-    cout<<" "<<ti[0,0];
-    for(int i=0; i<30; i++)
-    {
-        for(int j=0; j<30; j++)
-        {
-            cout<<" "<<fields[i,j];
-        }
-        cout<<"\n\n";
+        cout << "\n\n";
     }
 
     Point source = {0, 0};

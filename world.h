@@ -8,6 +8,8 @@
 #include <vector>
 #include <array>
 
+
+//just extern because getter and setter for arrays are annoying to deal with
 extern char fields[30][30];
 
 class world {
@@ -26,10 +28,6 @@ public:
     [[nodiscard]] std::vector<GameObject *> getGameObjectsOnMap() const;
 
     void setGameObjectsOnMap(const std::vector<GameObject *> &objectsOnMap);
-
-    static void setWorldAt(int p, int q, char c);
-
-    static char getWorldAt(int p, int q);
 };
 
 #endif //NEWLY_WORLD_H
