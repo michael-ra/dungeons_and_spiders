@@ -7,8 +7,7 @@
 
 class Enemy : public Game_Object {
 protected:
-    int health;
-    int dps;
+
 
     Enemy() {
 

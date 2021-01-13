@@ -1,0 +1,14 @@
+//
+// Created by Tim on 13.01.2021.
+//
+
+#ifndef DUNGEONCRAWLER_INCREASE_MAXHEALTH_POSTION_H
+#define DUNGEONCRAWLER_INCREASE_MAXHEALTH_POSTION_H
+
+
+class increase_maxhealth_postion {
+
+};
+
+
+#endif //DUNGEONCRAWLER_INCREASE_MAXHEALTH_POSTION_H

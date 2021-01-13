@@ -13,6 +13,11 @@ protected:
     int x;
     int y;
 
+    int health;
+    int dps;
+
+    int max_health;
+
 
 public:
 
@@ -29,6 +34,3 @@ public:
 
 
 
-class Item : public Game_Object {
-
-};
