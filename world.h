@@ -7,11 +7,11 @@
 
 #include <vector>
 #include <array>
+#include <bits/unique_ptr.h>
+using namespace std;
 
 
 //just extern because getter and setter for arrays are annoying to deal with
-extern char fields[30][30];
-
 class world {
 
 private:
@@ -21,13 +21,21 @@ private:
 public:
     world();
 private:
+    vector<vector<char>> vec;
+     std::unique_ptr<std::unique_ptr<char[]>[]> fields;
 
+private:
     std::vector<GameObject*> gameObjectsOnMap;
+
 public:
 
     [[nodiscard]] std::vector<GameObject *> getGameObjectsOnMap() const;
 
     void setGameObjectsOnMap(const std::vector<GameObject *> &objectsOnMap);
+
+    void setFields(char insert, int x, int y);
+
+    char getFields(int x, int y);
 };
 
 #endif //NEWLY_WORLD_H

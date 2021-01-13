@@ -3,8 +3,10 @@
 //
 
 #include "world.h"
+#include <iostream>
+using namespace std;
 
-char fields[30][30];
+
 
 std::vector<world::GameObject *> world::getGameObjectsOnMap() const {
     return gameObjectsOnMap;
@@ -15,4 +17,13 @@ void world::setGameObjectsOnMap(const std::vector<GameObject *> &objectsOnMap) {
 }
 
 world::world() {
-};
+    vec = vector<vector<char>>(30, vector<char> (30, NULL));
+}
+
+char world::getFields(int x, int y) {
+    return vec.at(x).at(y);
+}
+
+void world::setFields(char insert, int x, int y) {
+    world::vec.at(x).at(y) = insert;
+}

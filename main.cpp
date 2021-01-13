@@ -14,7 +14,7 @@ struct Point
 struct Node
 {
     Point point;
-    Node *previousNode;
+    Node * previousNode;
 
     [[nodiscard]] bool hasNext() const {
         return previousNode != nullptr;
@@ -65,10 +65,15 @@ bool isInside(int row, int col)
     }
 }
 
+void setPaths(Node node, world &World) {
 
-int pathfinder(world world, Point src, Point dest)
+}
+
+
+int pathfinder(world &w, Point src, Point dest)
 {
     int distance = 0;
+    bool end = false;
     unordered_map<Node, int, HashingNodes> dist;
     queue<Node> q;
     Node current = {
@@ -79,17 +84,20 @@ int pathfinder(world world, Point src, Point dest)
     q.push(current);
     int rowNum[] = {-1, 0, 0, 1};
     int colNum[] = {0, -1, 1, 0};
-    Node destination;
+    Node temp{};
 
     do{
         Node curr = q.front();
 
         if(getNodeHash(curr) == getPointHash(dest)) {
-            destination = curr; //get to destination
-
-
-
-            return -1; //sucess
+            w.setFields('#', temp.point.x, temp.point.y);
+            Node which = *temp.previousNode;
+            int i = 0;
+            while (which.hasNext()) {
+                w.setFields('#', which.point.x, which.point.y);
+                which = *which.previousNode;
+                i++;
+            }
         }
 
         q.pop();
@@ -111,52 +119,41 @@ int pathfinder(world world, Point src, Point dest)
             bool shouldBeFalse = check_key(dist,temp);
             cout << testHashingNode(temp);
              */
-
-            Node temp = { {row,col}, &curr };
-
-            if(isInside(row,col) && !(check_key(dist,temp))) {
+            Node check = { {row,col}, &curr };
+            bool isI = isInside(row,col);
+            bool chxkK = !(check_key(dist,check));
+            if(isInside(row,col) && !(check_key(dist,check))) {
+                temp = { {row,col}, &curr };
                 dist[temp] = dist[curr]+1;
                 q.push(temp);
+                }
             }
-        }
-
     }while(!q.empty());
 
     throw std::invalid_argument( "Points to pathfind given not connectable. Aborting everything - should we change this?" ); //TODO: Is this dangerous?
 
 }
 
-int* setPaths(Node destination) {
-    fields[destination.point.x][destination.point.y] = '\0';
-    Node* which = destination.previousNode;
-    while(which->hasNext()) {
-        fields[which->point.x][which->point.y] = '\0';
-        which = which->previousNode;
-    }
-}
-
-
 
 // Driver program to test above function
 int main()
 {
+    world w;
+    //cout << w.getFields(1,1);
 
-    world world;
-    for (int p = 0; p < 30; p++) {
-        for(int q = 0; q < 30; q++) {
-            fields[p][q] = '0';
-        }
-    }
+    Point source = {1, 1};
+    Point dest = {9, 7};
 
-    for (int p = 0; p < 30; p++) {
-        for(int q = 0; q < 30; q++) {
-            cout << fields[p][q] << " ";
+    auto i = pathfinder(w,source,dest);
+
+    for(int i=0; i<30; i++) {
+        for(int p=0; p<30; p++) {
+            if(w.getFields(i, p) == '#') {
+                cout << w.getFields(i, p) << "an Stelle" << i << "-" << p;
+            }
         }
         cout << "\n\n";
     }
-
-    Point source = {0, 0};
-    Point dest = {3, 4};
 
     return 0;
 }
