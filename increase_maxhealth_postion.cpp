@@ -9,6 +9,7 @@ class Increase_MaxHealth_Potion : Item {
 
     int max_potion;
 
+public:
     Increase_MaxHealth_Potion() {
 
         max_potion = 2;

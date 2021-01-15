@@ -13,6 +13,7 @@ protected:
 
     int extra_dps;
 
+public:
     IncreaseDpsPotion(char type) {
         if (type == 'i') {
             extra_dps = 1;

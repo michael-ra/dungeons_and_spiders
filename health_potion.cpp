@@ -9,7 +9,7 @@ class HealthPotion : public Item {
 
     //grosse und kleine healthpotion; Gross: 'O' klein: 'o'
 
-protected:
+public:
 
     HealthPotion(char size) {
         if (size == 'O') {

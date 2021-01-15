@@ -8,7 +8,6 @@
 class Enemy : public Game_Object {
 protected:
 
-
     Enemy() {
 
     }
