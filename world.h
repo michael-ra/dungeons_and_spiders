@@ -11,7 +11,6 @@
 using namespace std;
 
 
-//just extern because getter and setter for arrays are annoying to deal with
 class world {
 
 private:
@@ -23,6 +22,7 @@ public:
 private:
     vector<vector<char>> vec;
      std::unique_ptr<std::unique_ptr<char[]>[]> fields;
+     char test[30][30];
 
 private:
     std::vector<GameObject*> gameObjectsOnMap;
@@ -36,6 +36,8 @@ public:
     void setFields(char insert, int x, int y);
 
     char getFields(int x, int y);
+
+    void printWorld();
 };
 
 #endif //NEWLY_WORLD_H
