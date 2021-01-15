@@ -1,7 +1,9 @@
-#include <iostream>
 
-int main() {
-    std::cout << "Hello, World!" << std::endl;
-    std::cout << "Hello, ICH BINS, NICHT TIM!" << std::endl;
+using namespace std;
+
+// Driver program to test function
+int main()
+{
+
     return 0;
 }
