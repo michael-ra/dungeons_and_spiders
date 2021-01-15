@@ -33,6 +33,8 @@ public:
 
     void setGameObjectsOnMap(const std::vector<GameObject *> &objectsOnMap);
 
+    bool worldContains(char c);
+
     void setFields(char insert, int x, int y);
 
     char getFields(int x, int y);

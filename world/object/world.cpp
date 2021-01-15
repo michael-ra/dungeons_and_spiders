@@ -2,13 +2,14 @@
 // Created by PC-VtB on 12.01.2021.
 //
 
+#include <algorithm>
 #include "world.h"
 #include <iostream>
 using namespace std;
 
 
 
-std::vector<world::GameObject *> world::getGameObjectsOnMap() const {
+vector<world::GameObject *> world::getGameObjectsOnMap() const {
     return gameObjectsOnMap;
 }
 
@@ -36,3 +37,7 @@ void world::printWorld() {
         cout << "\n";
     }
 }
+
+/*
+ * TODO: if world contains char method
+ */
