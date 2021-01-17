@@ -12,26 +12,83 @@ public:
     int dps;
 
     Player() {
+        entity = '#';
         health = 5;
         dps = 5;
     }
 
     //Gehe davon aus, dass halt die steurung also keyabfrage und dann wenn key == keydown dann down etc
-    void down_movement() {
-        y += 1;
+    void down_movement(world w) {
+        Point p = point;
+        last_position = point;
+        p.y += 1;
+        if (checkFree(w, p)) {
+            point.y += 1;
+        }
     }
 
-    void up_movement() {
-        y -= 1;
+    void up_movement(world &w) {
+        Point p = point;
+        last_position = point;
+        p.y -= 1;
+        if (checkFree(w, p)) {
+            point.y -= 1;
+        }
     }
 
-    void left_movement() {
-        x -= 1;
+    void left_movement(world &w) {
+        Point p = point;
+        last_position = point;
+        p.x -= 1;
+        if (checkFree(w, p)) {
+            point.x -= 1;
+        }
     }
 
-    void right_movement() {
-        x += 1;
+    void right_movement(world &w) {
+        Point p = point;
+        last_position = point;
+        p.x += 1;
+        if (checkFree(w, p)) {
+            point.x += 1;
+        }
+    }
+
+    //Setter
+    void set_health(int health) {
+        if (health >= 0) {
+            this->health = health;
+        }
+    }
+
+    void set_dps(int dps) {
+        if (dps >= 0) {
+            this->dps = dps;
+        }
+    }
+
+    //Getter
+
+    int get_health() {
+        return health;
+    }
+
+    int get_dps() {
+        return dps;
     }
 
 
+    //If a collision appears take damage and go back to last_position
+    void damage(int dps_of_enemy) {
+        health -= dps_of_enemy;
+        point = last_position;
+    }
+
+    //true: wenn leben unter 0
+    bool dead() {
+        if (health <= 0) {
+            return true;
+        }
+        return false;
+    }
 };

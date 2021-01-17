@@ -16,19 +16,32 @@ public:
     Goblin() {
         health = 10;
         dps = 2;
+        entity = 'g';
     }
 
-    void movement(vector<char> world) {
+    void movement(world &w) {
 
-        if (world.at(0) == '1') {
-            y = y - 1;
-        } else if (world.at(1) == '1') {
-            x = x + 1;
-        } else if (world.at(2) == '1') {
-            y = y + 1;
-        } else if (world.at(3) == '1') {
-            x = x - 1;
+        vector<int> movements = giveMoveableSpots(w, point);
+        //Left
+        if (movements[0] == 0) {
+            last_position = point;
+            point.x = point.x - 1;
+        }
+            //Top
+        else if (movements[1] == 0) {
+            last_position = point;
+            point.y = point.y - 1;
+        }
+            //Right
+        else if (movements[2] == 0) {
+            last_position = point;
+            point.x = point.x + 1;
+        }
+            //Down
+        else if (movements[3] == 0) {
+            last_position = point;
+            point.y = point.y + 1;
         }
     }
-
 };
+

@@ -8,11 +8,10 @@
 class Enemy : public Game_Object {
 protected:
 
+
     Enemy() {
 
     }
-
-
     //Setter
 
     void set_health(int health) {
@@ -48,6 +47,12 @@ protected:
         } else {
             return false;
         }
+    }
+
+    //If it moves on top of Player: do damage and then step back to old position
+    void do_damage(int dmg_of_player) {
+        health -= dmg_of_player;
+        point = last_position;
     }
 
 

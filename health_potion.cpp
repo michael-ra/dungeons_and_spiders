@@ -14,9 +14,12 @@ public:
     HealthPotion(char size) {
         if (size == 'O') {
             potion = 5;
+
         } else {
             potion = 3;
+
         }
+        entity = size;
     }
 
     //Wenn Spieler mit einer Healthpostion kollidiert, dann erhoehe das leben des spielers (limitiert durch max_health des Spielers

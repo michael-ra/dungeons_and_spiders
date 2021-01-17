@@ -1,7 +1,13 @@
-#include <iostream>
+
+#include "worldutil.cpp"
+
 
 int main() {
-    std::cout << "Hello, World!" << std::endl;
-    std::cout << "Hello, ICH BINS, NICHT TIM!" << std::endl;
-    return 0;
+
+
+    world w;
+    generateNewWorld(w, 5);
+    return 1;
+
+
 }

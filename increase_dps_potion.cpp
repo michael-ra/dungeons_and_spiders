@@ -20,6 +20,7 @@ public:
         } else {
             extra_dps = 3;
         }
+        entity = type;
     }
 
     void increase_dmg() {

@@ -11,14 +11,12 @@ class Increase_MaxHealth_Potion : Item {
 
 public:
     Increase_MaxHealth_Potion() {
-
         max_potion = 2;
-
+        entity = 'p';
     }
 
     void increase_max_health() {
         max_health += max_potion;
-
     }
 
 };
