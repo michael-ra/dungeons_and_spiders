@@ -13,7 +13,6 @@ protected:
 
     }
     //Setter
-
     void set_health(int health) {
         //Setter for health
         this->health = health;
@@ -25,7 +24,6 @@ protected:
     }
 
     //Getter
-
     int get_health() {
         //Get the amount of health left
         return health;
@@ -54,6 +52,4 @@ protected:
         health -= dmg_of_player;
         point = last_position;
     }
-
-
 };

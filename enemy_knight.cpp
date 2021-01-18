@@ -8,10 +8,10 @@
 
 using namespace std;
 
-class Enemy_knight : public Enemy {
+class Knight : public Enemy {
 
 public:
-    Enemy_knight() {
+    Knight() {
 
         dps = 5;
         health = 5;

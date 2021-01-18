@@ -43,6 +43,18 @@ void world::printWorld() {
     }
 }
 
+//added by Tim
+bool world::is_object(world &w, int x, int y) {
+
+    if (w.getFields(x, y) == 'i' || w.getFields(x, y) == 'I' ||
+        w.getFields(x, y) == 'o' || w.getFields(x, y) == 'O' || w.getFields(x, y) == 'g' ||
+        w.getFields(x, y) == 'k' || w.getFields(x, y) == 'p' || w.getFields(x, y) == '#') {
+        return true;
+    }
+    return false;
+
+}
+
 /*
  * TODO: if world contains char method
  */

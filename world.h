@@ -43,6 +43,8 @@ public:
     char getFields(int x, int y);
 
     void printWorld();
+
+    bool is_object(world &w, int x, int y);
 };
 
 #endif //NEWLY_WORLD_H

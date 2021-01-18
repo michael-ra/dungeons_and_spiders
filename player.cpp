@@ -18,39 +18,47 @@ public:
     }
 
     //Gehe davon aus, dass halt die steurung also keyabfrage und dann wenn key == keydown dann down etc
-    void down_movement(world w) {
+    bool down_movement(world &w) {
         Point p = point;
         last_position = point;
         p.y += 1;
         if (checkFree(w, p)) {
             point.y += 1;
+        } else if (w.is_object(w, p.x, p.y)) {
+            return true;
         }
     }
 
-    void up_movement(world &w) {
+    bool up_movement(world &w) {
         Point p = point;
         last_position = point;
         p.y -= 1;
-        if (checkFree(w, p)) {
+        if (checkFree(w, p) || w.is_object(w, p.x, p.y)) {
             point.y -= 1;
+        } else if (w.is_object(w, p.x, p.y)) {
+            return true;
         }
     }
 
-    void left_movement(world &w) {
+    bool left_movement(world &w) {
         Point p = point;
         last_position = point;
         p.x -= 1;
         if (checkFree(w, p)) {
             point.x -= 1;
+        } else if (w.is_object(w, p.x, p.y)) {
+            return true;
         }
     }
 
-    void right_movement(world &w) {
+    bool right_movement(world &w) {
         Point p = point;
         last_position = point;
         p.x += 1;
         if (checkFree(w, p)) {
             point.x += 1;
+        } else if (w.is_object(w, p.x, p.y)) {
+            return true;
         }
     }
 
@@ -76,7 +84,6 @@ public:
     int get_dps() {
         return dps;
     }
-
 
     //If a collision appears take damage and go back to last_position
     void damage(int dps_of_enemy) {

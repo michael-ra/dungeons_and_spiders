@@ -17,10 +17,12 @@ public:
     IncreaseDpsPotion(char type) {
         if (type == 'i') {
             extra_dps = 1;
-        } else {
+            entity = type;
+        } else if (type == 'I') {
             extra_dps = 3;
+            entity = type;
         }
-        entity = type;
+
     }
 
     void increase_dmg() {
