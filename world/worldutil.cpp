@@ -188,10 +188,10 @@ int pathfinder(world &w, Point src, Point dest, int mode) //mode = 1 then using 
 void cancelExecution(string reason, string position) {
     if(debugMode != -1) {
         cout << "Execution will come to a hold at: " << position;
-        cout << "Reason:\n\n";
+        cout << "\nReason:\n\n";
         throw std::invalid_argument(reason);
     } else {
-        cout << "Something went wrong. If you want to debug, try turning on debug mode. Execution will proceed due to production mode enabled. Beware:";
+        cout << "\nSomething went wrong. If you want to debug, try turning on debug mode. Execution will proceed due to production mode enabled. Beware:";
     }
 }
 
