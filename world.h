@@ -47,4 +47,4 @@ public:
     bool is_object(world &w, int x, int y);
 };
 
-#endif //NEWLY_WORLD_H
+#endif NEWLY_WORLD_H

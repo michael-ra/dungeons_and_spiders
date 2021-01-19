@@ -1,84 +1,39 @@
-//
-// Created by Tim on 11.01.2021.
-//
-
 #include "game_object.h"
-#include "worldutil.cpp"
 
+void Game_Object::set_x(int x) {
+    point.x = x;
+}
 
-class Game_Object {
+void Game_Object::set_y(int y) {
+    point.y = y;
+}
 
-protected:
-    //category of the element
-    char entity;
+void Game_Object::set_point(Point point) {
+    this->point = point;
+}
 
-    //point before the last movement/step
-    Point last_position;
+void Game_Object::set_entity(char entity) {
+    this->entity = entity;
+}
 
-    //Game_Object Attributes
-    int health;
-    int max_health;
-    int dps;
+int Game_Object::get_x_point() {
+    return point.x;
+}
 
-    //Position
-    Point point;
+int Game_Object::get_y_point() {
+    return point.y;
+}
 
-    world w;
+Point Game_Object::get_point() {
+    return point;
+}
 
-public:
+void Game_Object::set_point_on_map(world &w) {
+    w.setFields(entity, point.x, point.y);
+}
 
-    Game_Object() {
-        entity = 'g';
-
-    }
-
-    Game_Object(int x, int y) {
-        point.x = x;
-        point.y = y;
-        entity = 'g';
-    }
-
-    //setter
-    void set_x(int x) {
-        point.x = x;
-    }
-
-    void set_y(int y) {
-        point.y = y;
-    }
-
-    void set_point(Point point) {
-        this->point = point;
-    }
-
-    void set_entity(char entity) {
-        this->entity = entity;
-    }
-
-    //getter
-    int get_x_point() {
-        return point.x;
-    }
-
-    int get_y_point() {
-        return point.y;
-    }
-
-    Point get_point() {
-        return point;
-    }
-
-    void set_point_on_map(world &w) {
-        w.setFields(entity, point.x, point.y);
-    }
-
-    char get_entity() {
-        return entity;
-    }
-
-
-};
-
-
+char Game_Object::get_entity() {
+    return entity;
+}
 
 

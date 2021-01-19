@@ -1,34 +1,6 @@
-//
-// Created by Tim on 13.01.2021.
-//
-
 #include "increase_dps_potion.h"
-#include "item.cpp"
+void IncreaseDpsPotion::increase_dmg() {
 
-class IncreaseDpsPotion : Item {
+    dps += extra_dps;
 
-    //Zwei Staerke Traenge; Small: 'i' Big: 'I'
-
-protected:
-
-    int extra_dps;
-
-public:
-    IncreaseDpsPotion(char type) {
-        if (type == 'i') {
-            extra_dps = 1;
-            entity = type;
-        } else if (type == 'I') {
-            extra_dps = 3;
-            entity = type;
-        }
-
-    }
-
-    void increase_dmg() {
-
-        dps += extra_dps;
-
-    }
-
-};
+}

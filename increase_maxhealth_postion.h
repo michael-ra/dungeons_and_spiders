@@ -6,7 +6,23 @@
 #define DUNGEONCRAWLER_INCREASE_MAXHEALTH_POSTION_H
 
 
-class increase_maxhealth_postion {
+//
+// Created by Tim on 13.01.2021.
+//
+
+#include "item.h"
+
+class Increase_MaxHealth_Potion : Item {
+
+    int max_potion;
+
+public:
+    Increase_MaxHealth_Potion() {
+        max_potion = 2;
+        entity = 'p';
+    }
+
+    void increase_max_health();
 
 };
 

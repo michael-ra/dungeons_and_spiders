@@ -2,6 +2,7 @@
 // Created by Tim on 17.01.2021.
 //
 
+
 #include "world.h"
 //
 // Created by PC-VtB on 12.01.2021.
@@ -58,3 +59,4 @@ bool world::is_object(world &w, int x, int y) {
 /*
  * TODO: if world contains char method
  */
+
