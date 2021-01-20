@@ -51,6 +51,9 @@ public:
 
     //true: wenn leben unter 0
     bool dead();
+
+    //Wenn Spieler mit einer Healthpostion kollidiert, dann erhoehe das leben des spielers (limitiert durch max_health des Spielers
+    void increase_health(int potion);
 };
 
 

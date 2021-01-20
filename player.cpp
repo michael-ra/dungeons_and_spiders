@@ -79,3 +79,12 @@ bool Player::dead() {
     }
     return false;
 }
+
+void Player::increase_health(int potion) {
+
+    if ((health += potion) >= max_health) {
+        health = max_health;
+    } else {
+        health += potion;
+    }
+}

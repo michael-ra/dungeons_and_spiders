@@ -15,7 +15,15 @@ class HealthPotion : public Item {
 
     //grosse und kleine healthpotion; Gross: 'O' klein: 'o'
 
+    int potion;
+
 public:
+
+
+    HealthPotion() {
+        this->potion = 3;
+    }
+
 
     HealthPotion(char size) {
         if (size == 'O') {
@@ -28,8 +36,20 @@ public:
 
     }
 
-    //Wenn Spieler mit einer Healthpostion kollidiert, dann erhoehe das leben des spielers (limitiert durch max_health des Spielers
-    void increase_health(int players_health);
+    //getter
+
+    int get_potion_size() {
+        return potion;
+    }
+
+    //setter
+    void set_potion_size(int potion) {
+        if (potion > 0) {
+            this->potion = potion;
+        }
+    }
+
+
 };
 
 

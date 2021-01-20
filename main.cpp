@@ -7,7 +7,9 @@
 #include "player.h"
 #include "Knights.h"
 #include "Goblins.h"
+#include "Health_Potions.h"
 #include "Collision.h"
+#include "health_potion.h"
 #include <vector>
 
 using namespace std;
@@ -21,20 +23,26 @@ int main() {
 
     int amount_goblin = 2;
     int amount_knight = 2;
+    int amount_helthpotion = 2;
 
     vector<Goblin *> goblins;
     vector<Knight *> knights;
+    vector<HealthPotion *> health_potions;
+
 
     Collision new_collision = Collision();
 
     Knights my_knights();
     Goblins my_goblins();
+    Health_Potions my_health_potions();
+
 
     for (int i = 0; i < amount_goblin; i++) {
         Goblin *zeiger = new Goblin();
         zeiger->set_point(getRandomFreePlace(w));
         zeiger->set_point_on_map(w);
         goblins.push_back(zeiger);
+
     }
 
     for (int i = 0; i < amount_knight; i++) {
@@ -42,6 +50,14 @@ int main() {
         zeiger->set_point(getRandomFreePlace(w));
         zeiger->set_point_on_map(w);
         knights.push_back(zeiger);
+
+    }
+
+    for (int i = 0; i < amount_helthpotion; i++) {
+        HealthPotion *zeiger = new HealthPotion();
+        zeiger->set_point(getRandomFreePlace(w));
+        zeiger->set_point_on_map(w);
+        health_potions.push_back(zeiger);
     }
 
     //same for items
@@ -60,8 +76,8 @@ int main() {
 
         // Frage die Tasten ab
         if (taste == "ArrowUp") {
-            player.up_movement(w);
-            if (player.up_movement(w)) {
+            bool is_object = player.up_movement(w);
+            if (is_object) {
                 char entity = w.getFields(player.get_x_point(), player.get_y_point() - 1);
 
                 if (entity == 'g') {
@@ -83,11 +99,19 @@ int main() {
                     }
 
                 }
+                if (entity == 'o') {
+                    HealthPotion *health_potion_pointer =
+                            my_health_potions().scearch_health_potion(health_potions, player.get_x_point(),
+                                                                      player.get_y_point() - 1);
+
+                    new_collision.collision_health_potion(&player, health_potion_pointer, &w);
+                }
+
 
             }
         } else if (taste == "ArrowDown") {
-            player.down_movement(w);
-            if (player.down_movement(w)) {
+            bool is_object = player.down_movement(w);
+            if (is_object) {
 
                 char entity = w.getFields(player.get_x_point(), player.get_y_point() + 1);
 
@@ -110,11 +134,18 @@ int main() {
                     }
 
                 }
+                if (entity == 'o') {
+                    HealthPotion *health_potion_pointer =
+                            my_health_potions().scearch_health_potion(health_potions, player.get_x_point(),
+                                                                      player.get_y_point() + 1);
+
+                    new_collision.collision_health_potion(&player, health_potion_pointer, &w);
+                }
 
             }
         } else if (taste == "ArrowLeft") {
-            player.left_movement(w);
-            if (player.left_movement(w)) {
+            bool is_object = player.left_movement(w);
+            if (is_object) {
                 char entity = w.getFields(player.get_x_point() - 1, player.get_y_point());
 
                 if (entity == 'g') {
@@ -136,9 +167,17 @@ int main() {
                     }
 
                 }
+
+                if (entity == 'o') {
+                    HealthPotion *health_potion_pointer =
+                            my_health_potions().scearch_health_potion(health_potions, player.get_x_point() - 1,
+                                                                      player.get_y_point());
+
+                    new_collision.collision_health_potion(&player, health_potion_pointer, &w);
+                }
             }
         } else if (taste == "ArrowRight") {
-            player.right_movement(w);
+            bool is_object = player.right_movement(w);
             if (player.right_movement(w)) {
                 char entity = w.getFields(player.get_x_point() + 1, player.get_y_point());
 
@@ -154,12 +193,18 @@ int main() {
                 if (entity == 'k') {
                     Knight *knight_pointer = my_knights().scearch_knight(knights, player.get_x_point() + 1,
                                                                          player.get_y_point());
-
                     bool player_dead = new_collision.collision_knight(&player, knight_pointer, &w);
                     if (player_dead) {
                         taste = "x";
                     }
 
+                }
+                if (entity == 'o') {
+                    HealthPotion *health_potion_pointer =
+                            my_health_potions().scearch_health_potion(health_potions, player.get_x_point() + 1,
+                                                                      player.get_y_point());
+
+                    new_collision.collision_health_potion(&player, health_potion_pointer, &w);
                 }
             }
         }

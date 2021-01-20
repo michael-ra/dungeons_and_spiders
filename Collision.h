@@ -7,8 +7,10 @@
 
 #include "enemy_knight.h"
 #include "enemy_goblin.h"
+#include "game_object.h"
 #include "player.h"
 #include "world.h"
+#include "health_potion.h"
 
 class Collision {
 
@@ -45,6 +47,13 @@ public:
 
     }
 
+    void collision_health_potion(Player *player, HealthPotion *health_potion, world *world) {
+
+        player->increase_health(health_potion->get_potion_size());
+        world->setFields('f', health_potion->get_x_point(), health_potion->get_y_point());
+        delete health_potion;
+
+    }
 };
 
 
