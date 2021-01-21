@@ -356,6 +356,7 @@ bool isDistanceLessThan(world &w, int distance, Point from, Point to) {
 
 /*
  * Test method for world generation (only if debug != 0)
+ * this is a-test
  */
 void testWorldGeneration(world &w) {
     if(debugMode != 0) {
