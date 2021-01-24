@@ -2,6 +2,9 @@
 // Created by PC-VtB on 15.01.2021.
 //
 
+#ifndef test
+#define test
+
 #include "worldutil.h"
 #include <iostream>
 #include "object/world.h"
@@ -75,10 +78,10 @@ int getPointHash(Point p) {
     return p.x + p.y * 30;
 }
 
-bool check_key(unordered_map<Node, int, HashingNodes> dist, Node key) {
+bool checkKey(unordered_map<Node, int, HashingNodes> dist, Node key) {
     if (debugMode != 0) {
         bool returntype = dist.find(key) == dist.end();
-        cout << "\ncheck_key returns\n";
+        cout << "\ncheckkey returns\n";
         cout << returntype;
         cout << "\n";
     }
@@ -173,7 +176,7 @@ int pathfinder(world &w, Point src, Point dest, int mode) //mode = 1 then using 
 
             Node check = { {row,col}, &curr, curr.distance+1 };
 
-            if(isInside(row,col) && !(check_key(dist,check))) {
+            if(isInside(row,col) && !(checkKey(dist,check))) {
                 dist[check] = curr.distance+1;
                 distanceMirror.at(row).at(col) = curr.distance+1;
                 q.push(check);
@@ -184,6 +187,58 @@ int pathfinder(world &w, Point src, Point dest, int mode) //mode = 1 then using 
     //throw std::invalid_argument( "Points to pathfind given not connectable. Aborting everything - should we change this?" ); //TODO: Is this dangerous?
     return -1;
 }
+
+
+//gives you Point on path for given player and enemy so that you can walk shortest distance
+Point pathGiver(world &w, Point player, Point enemy)
+{
+    unordered_map<Node, int, HashingNodes> dist;
+    queue<Node> q;
+    Node current = {
+            player,
+            nullptr,
+            0
+    };
+    dist[current] = 0;
+    q.push(current);
+    auto distanceMirror = vector<vector<int>>(30, vector<int> (30, 0));
+    Node curr;
+    do{
+        curr = q.front();
+        q.pop();
+
+        if(getNodeHash(curr) == getPointHash(enemy)) {
+            int distancePrev = 999;
+            Point goTo = {
+                    -999,-999
+            };
+            for(int i=0; i<4; i++) {
+                int row = enemy.x + rowNum[i];
+                int col = enemy.y + colNum[i];
+
+                if(distanceMirror.at(row).at(col) != 0 && distanceMirror.at(row).at(col) < distancePrev) {
+                    goTo = {
+                            row,col
+                    };
+                }
+            }
+        }
+
+        for(int i=0; i<4; i++) {
+            int row = curr.point.x + rowNum[i];
+            int col = curr.point.y + colNum[i];
+
+            Node check = { {row,col}, &curr, curr.distance+1 };
+
+            if(isInside(row,col) && !(checkKey(dist,check))) {
+                dist[check] = curr.distance+1;
+                distanceMirror.at(row).at(col) = curr.distance+1;
+                q.push(check);
+            }
+        }
+    }while(!q.empty());
+}
+
 
 void cancelExecution(string reason, string position) {
     if(debugMode != -1) {
@@ -264,7 +319,7 @@ bool checkFree(world &w, Point checked) {
  * TODO: (IMPORTANT FOR FEATURES) ---- Add diagonal movement
  */
 [[maybe_unused]] vector<int> giveMoveableSpots(world &w, Point p) {
-    vector<int> movements = {};
+    vector<int> movements = {1,1,1,1};
     for(int i=0; i<4; i++) {
         int row = p.x + rowNum[i];
         int col = p.y + colNum[i];
@@ -367,3 +422,4 @@ void testWorldGeneration(world &w) {
         cout << "Debug method called without wanting to debug. Set debugMode !=0";
     }
 }
+#endif
