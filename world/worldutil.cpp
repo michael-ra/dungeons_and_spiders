@@ -313,7 +313,7 @@ void savePathGenerator(int amount, world &w) {
         to = to_for;
 
 
-        Point end = {29, 29};
+        Point end = {28, 28};
         validPath = pathfinder(w, to, end, 1);
         if (validPath != 0) {
             cancelExecution("Path was not valid, validPath returned !=0", "pathGenerator->pathfinder");
