@@ -189,8 +189,8 @@ int pathfinder(world &w, Point src, Point dest, int mode) //mode = 1 then using 
 }
 
 
-//gives you Point on path for given player and enemy so that you can walk shortest distance
-Point pathGiver(world &w, Point player, Point enemy)
+//gives you Point on path for given player and enemy so that you can walk shortest distance, int is distance for when you want to get a valid point
+Point pathGiver(world &w, Point player, Point enemy, int distanceCheck)
 {
     unordered_map<Node, int, HashingNodes> dist;
     queue<Node> q;
@@ -217,8 +217,17 @@ Point pathGiver(world &w, Point player, Point enemy)
                 int col = enemy.y + colNum[i];
 
                 if(distanceMirror.at(row).at(col) != 0 && distanceMirror.at(row).at(col) < distancePrev) {
+                    distancePrev = distanceMirror.at(row).at(col);
                     goTo = {
                             row,col
+                    };
+                }
+
+                if(distancePrev <= distanceCheck) {
+                    return goTo;
+                } else {
+                    return {
+                        -999,-999
                     };
                 }
             }
@@ -237,6 +246,10 @@ Point pathGiver(world &w, Point player, Point enemy)
             }
         }
     }while(!q.empty());
+
+    return {
+            -999,-999
+    };
 }
 
 
