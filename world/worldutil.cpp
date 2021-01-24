@@ -238,7 +238,7 @@ Point pathGiver(world &w, Point player, Point enemy, int distanceCheck)
 
             Node check = { {row,col}, &curr, curr.distance+1 };
 
-            if(isInside(row,col) && !(checkKey(dist,check))) {
+            if(isInside(row,col) && !(checkKey(dist,check)) && w.getFields(row,col) != '#') {
                 dist[check] = curr.distance+1;
                 distanceMirror.at(row).at(col) = curr.distance+1;
                 q.push(check);
@@ -286,19 +286,39 @@ void pathGenerator(int amount, world &w) {
  */
 void savePathGenerator(int amount, world &w) {
     int validPath;
+    Point from = {
+            1,
+            1
+    };
+    Point to_for = {-999, -999};
     Point to = {
             getRandomNumber(1, 28),
             getRandomNumber(1, 28)
     };
-    for(int i=amount; i>=0; i--) {
-        Point from = {
+    validPath = pathfinder(w, from, to, 1);
+    if (validPath != 0) {
+        cancelExecution("Path was not valid, validPath returned !=0", "pathGenerator->pathfinder");
+    }
+
+    for (int i = amount; i >= 0; i--) {
+        to_for = {
                 getRandomNumber(1, 28),
                 getRandomNumber(1, 28)
         };
-        validPath = pathfinder(w,from,to,1);
-        if(validPath != 0) {
-            cancelExecution("Path was not valid, validPath returned !=0","pathGenerator->pathfinder");
+
+        validPath = pathfinder(w, to, to_for, 1);
+        if (validPath != 0) {
+            cancelExecution("Path was not valid, validPath returned !=0", "pathGenerator->pathfinder");
         }
+        to = to_for;
+
+
+        Point end = {29, 29};
+        validPath = pathfinder(w, to, end, 1);
+        if (validPath != 0) {
+            cancelExecution("Path was not valid, validPath returned !=0", "pathGenerator->pathfinder");
+        }
+
     }
 }
 
@@ -306,7 +326,7 @@ void savePathGenerator(int amount, world &w) {
  * Returns new world (type world), clearness = tunnels randomly generated (the higher the more tunnels randomly cleared)
  */
 world& generateNewWorld(world &worldTemplate, int clearness) {
-    pathGenerator(clearness, worldTemplate);
+    savePathGenerator(clearness, worldTemplate);
     if(debugMode != 0) {
         worldTemplate.printWorld();
     }

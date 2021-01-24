@@ -22,7 +22,6 @@ public:
 private:
     vector<vector<char>> vec;
      std::unique_ptr<std::unique_ptr<char[]>[]> fields;
-     char test[30][30];
 
 private:
     std::vector<GameObject*> gameObjectsOnMap;
