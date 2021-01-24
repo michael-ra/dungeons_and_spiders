@@ -5,7 +5,6 @@
 #ifndef test
 #define test
 
-#include "worldutil.h"
 #include <iostream>
 #include "object/world.h"
 #include <bits/stdc++.h>
@@ -406,6 +405,7 @@ int getDistance(world &w, Point from, Point to) {
         return distance;
     }
 }
+//TODO: check if returns 2 when nearby - while not checked just use 2 ffs
 
 bool isDistanceLessThan(world &w, int distance, Point from, Point to) {
     int temp = getDistance(w,from,to);
